@@ -31,6 +31,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            touch-action: none; /* Prevents unwanted zooming/scrolling on mobile */
         }
 
         @keyframes luxuryGradient {
@@ -130,6 +131,7 @@
             box-shadow: 0 0 35px rgba(255,51,102,0.6);
             transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
             margin-top: 25px;
+            z-index: 10;
         }
 
         .btn:hover {
@@ -137,7 +139,6 @@
             box-shadow: 0 20px 50px rgba(255,51,102,0.8);
         }
 
-        /* Improved Premium Envelope Card */
         .card-container {
             perspective: 1500px;
             margin: 50px 0 30px;
@@ -166,6 +167,7 @@
             transform-origin: top;
             transition: transform 1.6s cubic-bezier(0.23, 1, 0.32, 1);
             box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+            z-index: 2;
         }
 
         .envelope.open .flap {
@@ -191,14 +193,15 @@
             transform: translateY(60px) rotateX(10deg);
             opacity: 0;
             transition: all 1.6s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: 1;
         }
 
         .envelope.open .letter {
             transform: translateY(-100px) rotateX(5deg);
             opacity: 1;
+            z-index: 3;
         }
 
-        /* Hold-to-Reveal Heart Animation (Instagram style) */
         .hold-page {
             text-align: center;
         }
@@ -217,6 +220,7 @@
             margin: 0 auto 30px;
             cursor: pointer;
             user-select: none;
+            -webkit-user-select: none;
         }
 
         .heart-bg {
@@ -256,11 +260,12 @@
 
         .heart-fill {
             position: absolute;
-            inset: 12%;
+            inset: 0;
             background: var(--primary-pink);
             clip-path: url(#heart-shape);
             transform: scale(var(--fill-scale, 0));
             transition: transform 0.4s ease-out;
+            transform-origin: center;
         }
 
         .percentage {
@@ -279,6 +284,13 @@
             font-size: 4rem;
             opacity: 0;
             transition: opacity 0.8s;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-shadow: 0 0 30px var(--primary-pink);
+            z-index: 3;
         }
 
         .sparkle {
@@ -286,6 +298,10 @@
             inset: 0;
             pointer-events: none;
             opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
         }
 
         .sparkle.active {
@@ -299,13 +315,13 @@
             100% { opacity: 0; transform: scale(1.8); }
         }
 
-        /* Video without controls */
         #final-video {
             width: 92%;
             max-width: 580px;
             border-radius: 28px;
             box-shadow: 0 0 70px rgba(255,51,102,0.5);
             border: 2px solid rgba(212,175,55,0.4);
+            display: block; /* Ensures visibility */
         }
 
         .heart-particle {
@@ -315,6 +331,7 @@
             pointer-events: none;
             animation: floatUp 5s linear forwards;
             text-shadow: 0 0 15px var(--primary-pink);
+            z-index: 999;
         }
 
         @keyframes floatUp {
@@ -343,7 +360,6 @@
         <button class="btn" onclick="startExperience()">Open with Love ❤️</button>
     </div>
 
-    <!-- Only 5 photos now -->
     <div class="page" id="p1"><img src="photo1.jpg" class="photo-frame"><button class="btn" onclick="nextPage(2)">Next ❤️</button></div>
     <div class="page" id="p2"><img src="photo2.jpg" class="photo-frame"><button class="btn" onclick="nextPage(3)">Next ❤️</button></div>
     <div class="page" id="p3"><img src="photo3.jpg" class="photo-frame"><button class="btn" onclick="nextPage(4)">Next ❤️</button></div>
@@ -363,19 +379,20 @@
         <button class="btn" style="margin-top: 200px;" onclick="nextPage(7)">Continue ❤️</button>
     </div>
 
-    <div class="page" id="p7 hold-page">
+    <div class="page hold-page" id="p7">
         <h1 class="hold-question">How important are you to me?</h1>
         <div class="heart-container"
-             onmousedown="startHold()"
-             onmouseup="endHold()"
-             ontouchstart="startHold()"
-             ontouchend="endHold()">
+             onmousedown="startHold(event)"
+             onmouseup="endHold(event)"
+             onmouseleave="endHold(event)"
+             ontouchstart="startHold(event)"
+             ontouchend="endHold(event)">
             <div class="heart-bg"></div>
             <div class="heart" id="heartProgress">
                 <div class="heart-fill" id="heartFill"></div>
-                <span class="percentage" id="percentText">0%</span>
-                <span class="infinite-symbol" id="infty">∞</span>
             </div>
+            <span class="percentage" id="percentText">0%</span>
+            <span class="infinite-symbol" id="infty">∞</span>
             <div class="sparkle" id="sparkleEffect">✨✨✨</div>
         </div>
         <p style="font-size:1.1rem; opacity:0.8;">Hold the heart to find out...</p>
@@ -387,7 +404,7 @@
     </div>
 
     <div class="page" id="p9">
-        <video id="final-video" autoplay loop muted playsinline>
+        <video id="final-video" playsinline>
             <source src="video1.mp4" type="video/mp4">
         </video>
         <p style="margin-top: 35px; font-size: 1.6rem; color: var(--gold-accent); text-shadow: 0 0 25px rgba(212,175,55,0.6);">Forever & Always ❤️✨</p>
@@ -395,8 +412,8 @@
 
     <svg width="0" height="0">
         <defs>
-            <clipPath id="heart-shape">
-                <path d="M90,30 A60,60 0 0,1 150,90 A60,60 0 0,1 210,30 A90,90 0 0,1 150,150 A90,90 0 0,1 90,30 Z" />
+            <clipPath id="heart-shape" clipPathUnits="objectBoundingBox">
+                <path d="M0.5 0.9 C 0.5 0.9 0 0.6 0 0.25 C 0 0.1 0.15 0 0.3 0 C 0.4 0 0.5 0.1 0.5 0.1 C 0.5 0.1 0.6 0 0.7 0 C 0.85 0 1 0.1 1 0.25 C 1 0.6 0.5 0.9 0.5 0.9 Z" />
             </clipPath>
         </defs>
     </svg>
@@ -412,7 +429,7 @@
         }
 
         function startExperience() {
-            music.play().catch(() => {});
+            music.play().catch(() => console.log("Audio autoplay blocked by browser"));
             nextPage(1);
             createParticles();
         }
@@ -424,38 +441,50 @@
         function startVideoPage() {
             nextPage(9);
             music.pause();
-            video.play();
+            video.play().catch(() => console.log("Video play issue"));
         }
 
-        // Hold Heart Logic
-        function startHold() {
+        // Hold Heart Logic Fixed
+        function startHold(e) {
+            // Prevent double triggers on mobile devices
+            if (e.type === 'touchstart') e.preventDefault(); 
+            
+            if (isHolding) return;
             isHolding = true;
             progress = 0;
+            
+            document.getElementById('percentText').style.opacity = '1';
             document.getElementById('percentText').textContent = '0%';
             document.getElementById('infty').style.opacity = '0';
+            
+            clearInterval(holdTimer);
+            
             holdTimer = setInterval(() => {
                 if (!isHolding) return;
-                progress += 2; // Adjust speed
-                if (progress > 100) progress = 100;
+                progress += 2; 
+                if (progress >= 100) progress = 100;
+                
                 document.getElementById('heartProgress').style.setProperty('--progress', progress + '%');
                 document.getElementById('heartFill').style.setProperty('--fill-scale', progress / 100);
                 document.getElementById('percentText').textContent = progress + '%';
 
                 if (progress === 100) {
                     clearInterval(holdTimer);
+                    isHolding = false; // Stop further triggers
                     document.getElementById('percentText').style.opacity = '0';
                     document.getElementById('infty').style.opacity = '1';
                     document.getElementById('sparkleEffect').classList.add('active');
-                    setTimeout(() => nextPage(8), 1800); // Auto next after reveal
+                    setTimeout(() => nextPage(8), 1800); 
                 }
-            }, 60);
+            }, 50); // Thoda smooth aur fast banaya hai
         }
 
-        function endHold() {
+        function endHold(e) {
+            if (!isHolding) return;
             isHolding = false;
             clearInterval(holdTimer);
             if (progress < 100) {
-                // Reset if released early (optional luxury feel)
+                // Reset if released early
                 progress = 0;
                 document.getElementById('heartProgress').style.setProperty('--progress', '0%');
                 document.getElementById('heartFill').style.setProperty('--fill-scale', '0');
@@ -463,7 +492,6 @@
             }
         }
 
-        // Floating particles (hearts/sparkles)
         function createParticles() {
             setInterval(() => {
                 const particle = document.createElement('div');
