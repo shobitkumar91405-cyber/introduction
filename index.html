@@ -2,370 +2,399 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Cutiee ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>I am really sorry 😥❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --pink: #ff69b4;
-            --deep-pink: #ff1493;
-            --purple: #ba55d3;
-            --glass: rgba(255, 255, 255, 0.15);
-        }
-        
+        /* RESET & BASE */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
-        
+
         body {
             font-family: 'Poppins', sans-serif;
-            color: white;
             background: #000;
+            color: #fff;
+            overflow: hidden; 
             height: 100vh;
-            overflow: hidden; /* Prevent double scrollbars */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        
-        /* Optimized Gradient Background */
-        .gradient-bg {
+
+        /* TOP INSTA TAG */
+        .insta-tag {
             position: fixed;
+            top: 10px;
+            width: 100%;
+            text-align: center;
+            z-index: 1000;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+        }
+        .insta-tag b { color: #ff6b81; }
+
+        /* BACKGROUND ANIMATION */
+        .bg-gradient {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #ff69b4, #ff1493, #ba55d3, #9400d3);
-            background-size: 200% 200%;
-            animation: gradientShift 10s ease infinite;
-            z-index: -3;
-            will-change: background-position;
+            background: linear-gradient(-45deg, #2d3436, #d63031, #636e72, #e84393);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            z-index: -2;
+            opacity: 0.4;
         }
         
-        @keyframes gradientShift {
+        @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        
-        /* Scroll Snap Container */
-        .snap-container {
-            height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            scroll-behavior: smooth;
-        }
-        
-        .section {
-            height: 100vh;
+
+        /* CONTAINER */
+        .app-container {
             width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            scroll-snap-align: start;
+            max-width: 450px;
+            height: 100%;
             position: relative;
-            padding: 20px;
-        }
-        
-        /* Optimized Glass Card */
-        .glass-card {
-            background: var(--glass);
-            backdrop-filter: blur(10px); /* Reduced blur for performance */
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 24px;
-            padding: 30px 20px;
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            z-index: 10;
-        }
-        
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #fff, #ffe4e1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        h2 { font-size: 1.8rem; margin-bottom: 15px; }
-        p { font-size: 1rem; line-height: 1.5; margin-bottom: 20px; opacity: 0.9; }
-        
-        /* GIF Container */
-        .gif-container {
-            margin: 15px auto;
-            max-width: 240px;
-            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
-            border: 3px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .gif-container img { width: 100%; display: block; }
-        
-        /* Next Button Styling */
-        .next-btn {
-            background: white;
-            color: var(--deep-pink);
-            border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: transform 0.2s;
-            margin-top: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
         }
 
-        .next-btn:active { transform: scale(0.95); }
-
-        /* Floating Hearts */
-        #hearts-container {
-            position: fixed;
-            inset: 0;
+        /* FLOATING HEARTS */
+        .hearts-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            z-index: 1;
+            z-index: 0;
         }
-        
-        .floating-heart {
+
+        .heart {
             position: absolute;
             bottom: -50px;
-            animation: floatHeart linear forwards;
-            will-change: transform, opacity;
-        }
-        
-        @keyframes floatHeart {
-            to { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
-        }
-        
-        /* Typing Effect */
-        .typing {
-            font-size: 1.2rem;
-            font-weight: 600;
-            min-height: 30px;
-            margin: 15px 0;
-            color: #ffe4e1;
-        }
-        
-        /* Modal Fixes */
-        .modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            padding: 20px;
-        }
-        
-        .modal-content {
-            background: #fff;
-            color: #333;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 320px;
-            position: relative;
+            background-color: #ff4757;
+            display: inline-block;
+            height: 20px;
+            width: 20px;
+            transform: rotate(-45deg);
+            animation: float 5s linear infinite;
+            opacity: 0.8;
         }
 
-        .close-modal {
-            margin-top: 20px;
-            padding: 8px 20px;
-            background: var(--deep-pink);
+        .heart::after, .heart::before {
+            content: "";
+            background-color: inherit;
+            border-radius: 50%;
+            height: 20px;
+            width: 20px;
+            position: absolute;
+        }
+        .heart::after { top: 0; left: 10px; }
+        .heart::before { top: -10px; left: 0; }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(-45deg) scale(0.5); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) rotate(-45deg) scale(1.2); opacity: 0; }
+        }
+
+        /* SECTIONS */
+        .section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.6s ease-in-out;
+            transform: translateY(20px);
+            z-index: 10;
+        }
+
+        .section.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* GLASS CARDS */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 30px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        .gif-container {
+            width: 100%;
+            height: 180px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .gif-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* TEXT STYLES */
+        h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: #ff7675;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 10px rgba(255, 118, 117, 0.4);
+        }
+
+        p {
+            font-size: 0.95rem;
+            color: #dfe6e9;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* BUTTONS */
+        .btn {
+            background: linear-gradient(45deg, #ff4757, #ff6b81);
             color: white;
             border: none;
-            border-radius: 20px;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+            transition: 0.3s;
         }
 
-        /* Music Floating Button */
-        .music-btn {
+        .btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 71, 87, 0.5); }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 100%;
+            margin-bottom: 12px;
+            padding: 10px;
+            border-radius: 15px;
+            color: #fab1a0;
+        }
+
+        /* MODAL */
+        .modal-overlay {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 50px;
-            height: 50px;
-            background: var(--glass);
-            border: 1px solid white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
             z-index: 1000;
-            cursor: pointer;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
-        @media (max-width: 400px) {
-            h1 { font-size: 2.2rem; }
-            .glass-card { padding: 20px 15px; }
+        .modal-content {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            border: 1px solid #ff7675;
+            max-width: 350px;
         }
+
+        /* MUSIC CONTROL */
+        .music-btn {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(255,255,255,0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="gradient-bg"></div>
-    <div id="hearts-container"></div>
-    
-    <audio id="bg-music" loop>
-        <source src="tere-liye.mp3" type="audio/mpeg">
+    <div class="insta-tag">Follow on Insta: <b>@smss1708</b></div>
+
+    <audio id="bgMusic" loop>
+        <source src="tere-liye.mp3" type="audio/mp3">
     </audio>
-    
-    <div class="music-btn" id="music-btn">♫</div>
 
-    <div class="snap-container" id="snap-container">
-        
-        <section class="section" id="s1">
-            <div class="glass-card">
-                <h1>For My Cutiee ❤️</h1>
-                <div class="gif-container">
-                    <img src="https://media.giphy.com/media/26ufnwz3wDUli7GU0/giphy.gif" alt="Love">
-                </div>
-                <div class="typing" id="typing-text"></div>
-                <button class="next-btn" onclick="scrollToSection('s2')">Tap to Start ➔</button>
-            </div>
-        </section>
-        
-        <section class="section" id="s2">
-            <div class="glass-card">
-                <h2>I'm So Sorry 😔</h2>
-                <div class="gif-container">
-                    <img src="sorry1.gif" alt="Sorry">
-                </div>
-                <p>I never meant to hurt you. Every tear of yours breaks my heart...</p>
-                <button class="next-btn" onclick="scrollToSection('s3')">I Forgive You? ➔</button>
-            </div>
-        </section>
-        
-        <section class="section" id="s3">
-            <div class="glass-card">
-                <h2>My Heart Beats... ❤️</h2>
-                <div class="gif-container">
-                    <img src="sad1.gif" alt="Heart">
-                </div>
-                <p>It only dances for you, every single second.</p>
-                <button class="next-btn" onclick="scrollToSection('s4')">See More ➔</button>
-            </div>
-        </section>
-        
-        <section class="section" id="s4">
-            <div class="glass-card">
-                <h2>Our Feelings</h2>
-                <div style="display: grid; gap: 10px;">
-                    <button class="next-btn" style="background:rgba(255,255,255,0.2); color:white;" onclick="openModal('m1')">💔 My Regret</button>
-                    <button class="next-btn" style="background:rgba(255,255,255,0.2); color:white;" onclick="openModal('m2')">🤗 My Care</button>
-                    <button class="next-btn" style="background:rgba(255,255,255,0.2); color:white;" onclick="openModal('m3')">🌟 My Promise</button>
-                </div>
-                <button class="next-btn" style="margin-top:20px" onclick="scrollToSection('s5')">Next Page ➔</button>
-            </div>
-        </section>
-        
-        <section class="section" id="s5">
-            <div class="glass-card">
-                <h2>I Miss You...</h2>
-                <div class="gif-container">
-                    <img src="https:promise.gif" alt="Love">
-                </div>
-                <p>Every moment without your smile feels like a thousand years.</p>
-                <button class="next-btn" onclick="scrollToSection('s6')">One Last Thing ➔</button>
-            </div>
-        </section>
-        
-        <section class="section" id="s6">
-            <div class="glass-card">
-                <h2>Forever Yours ❤️</h2>
-                <p>I will love you louder than my mistakes. You are my everything.</p>
-                <div style="font-size: 2rem;">💍</div>
-                <p><b>Will you stay mine?</b></p>
-                <button class="next-btn" onclick="location.reload()">Start Over ✨</button>
-            </div>
-        </section>
-    </div>
+    <div class="app-container">
+        <div class="bg-gradient"></div>
+        <div class="hearts-container" id="heartsContainer"></div>
 
-    <div class="modal" id="m1">
-        <div class="modal-content">
-            <h3>💔 My Regret</h3>
-            <p>I regret every second I made you feel unloved. You deserve the world.</p>
-            <button class="close-modal" onclick="closeModal('m1')">Close</button>
+        <div class="section active" id="section1">
+            <div class="glass-card">
+                <div class="gif-container">
+                    <img src="intro.gif" alt="Intro" onerror="this.src='https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2Zicmd4cnR4ZGR4Mnd4ZGR4Mnd4ZGR4Mnd4ZGR4Mnd4ZGR4Mnd4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/26BRv0ThflsHCqDrG/giphy.gif'">
+                </div>
+                <h2>Hey Cutiepie 🌹</h2>
+                <p>Can we talk for a moment?<br>There’s something important I want to tell you…</p>
+                <button class="btn" onclick="nextSection(2)">Open Heart ❤️</button>
+            </div>
         </div>
-    </div>
-    <div class="modal" id="m2">
-        <div class="modal-content">
-            <h3>🤗 My Care</h3>
-            <p>Your happiness is my only priority. You are my safe place.</p>
-            <button class="close-modal" onclick="closeModal('m2')">Close</button>
+
+        <div class="section" id="section2">
+            <div class="glass-card">
+                <div class="gif-container">
+                    <img src="sorry1.gif" alt="Sorry" onerror="this.src='https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnd4Nnd4Nnd4Nnd4Nnd4Nnd4Nnd4Nnd4Nnd4Nnd4Nnd4Nnd4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l4pT2ASyWWGw4NbDq/giphy.gif'">
+                </div>
+                <h2>My Cutie...</h2>
+                <p>I know I hurt you…<br>and I’ve been feeling really bad about it lately.</p>
+                <button class="btn" onclick="nextSection(3)">Next →</button>
+            </div>
         </div>
-    </div>
-    <div class="modal" id="m3">
-        <div class="modal-content">
-            <h3>🌟 My Promise</h3>
-            <p>I promise to make every moment beautiful for you from now on.</p>
-            <button class="close-modal" onclick="closeModal('m3')">Close</button>
+
+        <div class="section" id="section3">
+            <div class="glass-card">
+                <h2>From my heart…</h2>
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <div class="gif-container" style="height: 120px;">
+                        <img src="heart1.gif" alt="Heart 1" onerror="this.src='https://media.giphy.com/media/LpDmM2wSt6Hm5fKJVa/giphy.gif'">
+                    </div>
+                    <div class="gif-container" style="height: 120px;">
+                        <img src="heart2.gif" alt="Heart 2" onerror="this.src='https://media.giphy.com/media/R6gvnAx4h0t7a/giphy.gif'">
+                    </div>
+                </div>
+                <p>You mean the world to me.</p>
+                <button class="btn" onclick="nextSection(4)">Feel My Words ❤️</button>
+            </div>
+        </div>
+
+        <div class="section" id="section4">
+            <div class="glass-card">
+                <h2>Little things…</h2>
+                <p>Things I want you to know</p>
+                <button class="btn btn-outline" onclick="openModal('regret')">💖 My Regret</button>
+                <button class="btn btn-outline" onclick="openModal('care')">💖 My Care</button>
+                <button class="btn btn-outline" onclick="openModal('promise')">💖 My Promise</button>
+                <div style="margin-top: 20px;">
+                    <button class="btn" onclick="nextSection(5)">Keep Going →</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="section5">
+            <div class="glass-card">
+                <div class="gif-container">
+                    <img src="promise.gif" alt="Promise" onerror="this.src='https://media.giphy.com/media/3o7TKoWXm3okO1kgHC/giphy.gif'">
+                </div>
+                <p>
+                    I’m sorry <strong>Cutie</strong>, for hurting you.<br>
+                    I never wanted to be the reason behind your silence.
+                </p>
+                <p>I promise to grow and be better for you.</p>
+                <button class="btn" onclick="nextSection(6)">Forgive Me? ❤️</button>
+            </div>
+        </div>
+
+        <div class="section" id="section6">
+            <div class="glass-card">
+                <div class="gif-container">
+                    <img src="endlove.gif" alt="End Love" onerror="this.src='https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif'">
+                </div>
+                <h2>I Promise...</h2>
+                <p>I promise to listen more, understand better, and never let you feel alone again.</p>
+                <p style="font-family: 'Dancing Script'; font-size: 1.5rem; color: #ff7675;">Forever Yours.</p>
+                <small style="opacity: 0.5;">Made with Love by Ansh</small>
+            </div>
+        </div>
+
+        <div class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</div>
+
+        <div class="modal-overlay" id="messageModal">
+            <div class="modal-content">
+                <h2 id="modalTitle" style="font-size: 1.5rem;"></h2>
+                <p id="modalText" style="font-style: italic;"></p>
+                <button class="btn" onclick="closeModal()">Close</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // Navigation Function
-        function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        const music = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) { music.pause(); musicBtn.style.animationPlayState = 'paused'; } 
+            else { music.play(); musicBtn.style.animationPlayState = 'running'; }
+            isPlaying = !isPlaying;
         }
 
-        // Optimized Music
-        const music = document.getElementById('bg-music');
-        const musicBtn = document.getElementById('music-btn');
-        let playing = false;
+        function nextSection(num) {
+            if (!isPlaying) toggleMusic(); 
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('section' + num).classList.add('active');
+        }
 
-        musicBtn.onclick = () => {
-            if(!playing) { music.play(); musicBtn.innerHTML = '♪'; }
-            else { music.pause(); musicBtn.innerHTML = '♫'; }
-            playing = !playing;
+        const messages = {
+            regret: { title: "My Regret 💔", text: "I regret hurting you Cutie… I never meant to cause pain. Seeing you upset is the last thing I ever wanted." },
+            care: { title: "My Care ✨", text: "You matter to me Cutie, more than words can explain. Your smile is my favorite thing in the world." },
+            promise: { title: "My Promise 🤝", text: "I promise to be more patient and never let you walk alone through any pain again. I'm here, always." }
         };
 
-        // Optimized Hearts (Throttled for performance)
+        function openModal(type) {
+            document.getElementById('modalTitle').innerText = messages[type].title;
+            document.getElementById('modalText').innerText = messages[type].text;
+            document.getElementById('messageModal').style.display = 'flex';
+        }
+
+        function closeModal() { document.getElementById('messageModal').style.display = 'none'; }
+
         function createHeart() {
-            const container = document.getElementById('hearts-container');
-            if (container.childElementCount > 15) return; // Limit total hearts to stop lag
-
             const heart = document.createElement('div');
-            heart.className = 'floating-heart';
-            heart.innerHTML = ['❤️', '💖', '💕'][Math.floor(Math.random() * 3)];
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = (Math.random() * 10 + 20) + 'px';
-            heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
-            
-            container.appendChild(heart);
-            setTimeout(() => heart.remove(), 6000);
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+            const size = Math.random() * 15 + 10 + "px";
+            heart.style.width = size; heart.style.height = size;
+            document.getElementById('heartsContainer').appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
         }
-        setInterval(createHeart, 800);
-
-        // Typing Effect
-        const text = "Hey Cutiee, I have something to say...";
-        let i = 0;
-        function type() {
-            if (i < text.length) {
-                document.getElementById('typing-text').innerHTML += text.charAt(i);
-                i++;
-                setTimeout(type, 80);
-            }
-        }
-
-        // Modals
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-        window.onload = () => {
-            type();
-            // Start music on first click anywhere
-            document.body.addEventListener('click', () => {
-                if(!playing) { music.play(); playing = true; musicBtn.innerHTML = '♪'; }
-            }, {once: true});
-        };
+        setInterval(createHeart, 300);
     </script>
 </body>
 </html>
