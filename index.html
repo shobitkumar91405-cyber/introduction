@@ -17,65 +17,58 @@
 
         .insta-banner {
             position: fixed; top: 0; width: 100%; text-align: center; padding: 12px;
-            background: rgba(255, 255, 255, 0.95); z-index: 2000; font-weight: 600;
-            color: var(--main-pink); border-bottom: 1px solid var(--soft-pink); font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.9); z-index: 1000; font-weight: 600;
+            color: var(--main-pink); border-bottom: 1px solid var(--soft-pink);
         }
 
         section {
             width: 100%; height: 100vh; display: none; flex-direction: column;
             justify-content: center; align-items: center; padding: 20px;
             background: radial-gradient(circle, #ffffff 0%, #fffafa 100%);
-            position: relative;
+            position: relative; overflow: hidden;
         }
 
         section.active { display: flex; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Shairi Page Specifics */
-        #p2 { display: none; height: 100vh; overflow-y: auto; overflow-x: hidden; justify-content: flex-start; padding-top: 80px; scroll-behavior: smooth; }
-        #p2.active { display: block; }
+        /* Animation Styles */
+        .glowing-text {
+            color: var(--main-pink); text-shadow: var(--pink-glow);
+            font-family: 'Dancing Script', cursive; font-size: 1.5rem;
+            margin: 10px 0; opacity: 0; transform: scale(0.9); transition: 0.6s all;
+        }
+        .show-msg { opacity: 1; transform: scale(1); }
 
-        .chat-container { width: 100%; position: relative; min-height: 1200px; }
+        /* Chat & Line Container */
+        .chat-container { width: 100%; height: 80vh; position: relative; margin-top: 50px; }
         #canvas-lines { position: absolute; top: 0; left: 0; z-index: 1; pointer-events: none; }
         
         .bubble {
-            background: white; padding: 12px 18px; border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.1); border: 1px solid var(--soft-pink);
-            position: absolute; z-index: 2; font-size: 0.95rem; max-width: 75%;
-            color: #333; opacity: 0; transform: translateY(10px); transition: 0.6s all;
-            text-shadow: 0 0 2px rgba(255, 20, 147, 0.2);
+            background: white; padding: 10px 15px; border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--soft-pink);
+            position: absolute; z-index: 2; font-size: 0.9rem; max-width: 70%;
+            color: #444; opacity: 0; transition: 0.5s;
         }
 
         .dot {
-            width: 14px; height: 14px; background: var(--main-pink);
+            width: 12px; height: 12px; background: var(--main-pink);
             border-radius: 50%; box-shadow: var(--pink-glow);
             position: absolute; z-index: 3; opacity: 0; transform: scale(0);
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .glowing-text {
-            color: var(--main-pink); text-shadow: var(--pink-glow);
-            font-family: 'Dancing Script', cursive; font-size: 1.8rem;
-            margin: 10px 0;
-        }
-
         .btn-love {
-            padding: 14px 45px; background: linear-gradient(45deg, #ff69b4, #ff1493);
-            color: white; border: none; border-radius: 50px; font-weight: 600;
-            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4); cursor: pointer;
-            z-index: 1000; transition: 0.3s;
+            padding: 12px 40px; background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white; border: none; border-radius: 30px; font-weight: 600;
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4); cursor: pointer; z-index: 100;
         }
-
-        .btn-love:active { transform: scale(0.9); }
-
-        /* Gauge for Love Test */
-        .gauge-box { font-size: 4rem; font-weight: 800; color: var(--main-pink); text-shadow: var(--pink-glow); }
 
         /* Scratch Card */
-        #scratch-card { position: relative; width: 300px; height: 200px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 20px 0; }
-        #canvas-scratch { position: absolute; top: 0; left: 0; z-index: 2; cursor: crosshair; }
-        .hidden-content { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: white; z-index: 1; }
+        #scratch-card { position: relative; width: 280px; height: 180px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        #canvas-scratch { position: absolute; top: 0; left: 0; z-index: 2; }
+        .hidden-content { position: absolute; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: white; z-index: 1; }
 
-        .intro-gif { width: 220px; border-radius: 20px; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .intro-gif { width: 200px; border-radius: 20px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
@@ -85,48 +78,45 @@
 
     <section id="p1" class="active">
         <img src="gif1.gif" class="intro-gif">
-        <h2 class="glowing-text">hii cutee i want to say something</h2>
+        <h2 class="glowing-text show-msg">hii cutee i want to say something</h2>
         <button class="btn-love" onclick="startApp()">Continue ❤️</button>
     </section>
 
     <section id="p2">
+        <canvas id="canvas-lines"></canvas>
         <div class="chat-container" id="chat-box">
-            <canvas id="canvas-lines"></canvas>
             </div>
-        <div style="width:100%; display:flex; justify-content:center; padding: 40px 0;">
-            <button class="btn-love" id="btnNext" style="display:none;" onclick="nextPage(2,3)">Continue ❤️</button>
-        </div>
+        <button class="btn-love" id="btnNext" style="display:none; position: absolute; bottom: 30px;" onclick="nextPage(2,3)">Continue ❤️</button>
     </section>
 
     <section id="p3">
-        <h2 class="glowing-text" style="font-size: 2.2rem;">Our Compatibility</h2>
-        <div class="gauge-box" id="gauge">0%</div>
-        <p class="glowing-text" style="font-size: 1.2rem;">Perfect Match 💖 Our hearts beat as one.</p>
+        <h2 class="glowing-text show-msg">Love Compatibility</h2>
+        <div style="font-size: 5rem; font-weight: bold; color: var(--main-pink); text-shadow: var(--pink-glow);">100%</div>
+        <p class="glowing-text show-msg">Perfect Match 💖</p>
         <button class="btn-love" onclick="nextPage(3,4)">Continue ❤️</button>
     </section>
 
     <section id="p4">
-        <div style="background: white; padding: 40px; border-radius: 30px; border: 1px solid var(--soft-pink); box-shadow: 0 15px 35px var(--soft-pink); width: 85%;">
-            <div style="font-size: 4rem;">🌙</div>
-            <p class="glowing-text">I promise to be your peace when life feels too loud.</p>
+        <div style="background: white; padding: 30px; border-radius: 20px; border: 2px solid var(--soft-pink); box-shadow: 0 10px 20px var(--soft-pink);">
+            <div style="font-size: 3rem;">🌙</div>
+            <p class="glowing-text show-msg">I promise to be your peace when life feels too loud.</p>
         </div>
-        <button class="btn-love" onclick="nextPage(4,5)">Show Surprise 🎁</button>
+        <button class="btn-love" onclick="nextPage(4,5)">Surprise 🎁</button>
     </section>
 
     <section id="p5">
-        <h2 class="glowing-text">A Little Surprise For You</h2>
+        <h2 class="glowing-text show-msg">Scratch Gently ❤️</h2>
         <div id="scratch-card">
             <div class="hidden-content">
-                <p class="glowing-text" style="font-size: 1.4rem;">I Love You So Much! ❤️</p>
-                <p style="color: var(--main-pink); font-weight: bold; margin-top: 5px;">@smss1708</p>
+                <p class="glowing-text show-msg">I Love You So Much! ❤️<br>@smss1708</p>
             </div>
-            <canvas id="canvas-scratch" width="300" height="200"></canvas>
+            <canvas id="canvas-scratch" width="280" height="180"></canvas>
         </div>
-        <button class="btn-love" style="margin-top:20px;" onclick="location.reload()">Replay ❤️</button>
+        <button class="btn-love" style="margin-top:30px;" onclick="location.reload()">Replay ✨</button>
     </section>
 
     <script>
-        const shairiLines = [
+        const shairi = [
             "Tum bologi dhimi aavaz me", "fir bhi bat pakad lunga",
             "gale nhi lagaunga tumko", "bus hath pakad lunga",
             "aur is thodi si mohabbat ki aag me", "jindgi bhar jana hai",
@@ -135,117 +125,101 @@
             "jyada ki chah nhi mujhko thodi di meri ho sakti ho kya💯"
         ];
 
-        const music = document.getElementById('bgMusic');
-        let currentStep = 0;
-        let lastDotX, lastDotY;
-
         function startApp() {
-            music.play();
+            document.getElementById('bgMusic').play();
             nextPage(1, 2);
-            setTimeout(initShairi, 500);
+            initShairiAnimation();
         }
 
         function nextPage(curr, next) {
-            document.getElementById('p' + curr).classList.remove('active');
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
             document.getElementById('p' + next).classList.add('active');
-            if(next === 3) startGauge();
             if(next === 5) initScratch();
         }
 
-        function initShairi() {
+        function initShairiAnimation() {
             const container = document.getElementById('chat-box');
             const canvas = document.getElementById('canvas-lines');
             canvas.width = window.innerWidth;
-            canvas.height = 1500; // Enough height for all lines
+            canvas.height = window.innerHeight;
             const ctx = canvas.getContext('2d');
             ctx.strokeStyle = '#ff1493';
             ctx.lineWidth = 2;
-            ctx.setLineDash([6, 6]);
+            ctx.setLineDash([5, 5]);
 
-            function spawnLine() {
-                if (currentStep >= shairiLines.length) {
+            let i = 0;
+            let lastX, lastY;
+
+            function step() {
+                if (i >= shairi.length) {
                     document.getElementById('btnNext').style.display = 'block';
                     return;
                 }
 
-                const isLeft = currentStep % 2 === 0;
-                const y = 60 + (currentStep * 110);
-                
-                // 1. Create Bubble
+                // Calculate Position
+                const side = i % 2 === 0 ? 'left' : 'right';
+                const yPos = 50 + (i * 70);
+                const xPos = side === 'left' ? 20 : window.innerWidth - 180;
+
+                // Create Bubble
                 const b = document.createElement('div');
                 b.className = 'bubble';
-                b.innerText = shairiLines[currentStep];
-                b.style.top = y + 'px';
-                if(isLeft) b.style.left = '15px'; else b.style.right = '15px';
+                b.style.top = yPos + 'px';
+                b.style[side] = '20px';
+                b.innerText = shairi[i];
                 container.appendChild(b);
 
-                // 2. Create Dot
+                // Create Dot
                 const d = document.createElement('div');
                 d.className = 'dot';
-                const dotX = isLeft ? 200 : window.innerWidth - 200;
-                const dotY = y + 25;
+                const dotX = side === 'left' ? xPos + 150 : xPos - 20;
+                const dotY = yPos + 20;
                 d.style.left = dotX + 'px';
                 d.style.top = dotY + 'px';
                 container.appendChild(d);
 
-                // 3. Animate
                 setTimeout(() => {
                     b.style.opacity = '1';
-                    b.style.transform = 'translateY(0)';
                     d.style.opacity = '1';
                     d.style.transform = 'scale(1)';
-
-                    // Draw Line from previous dot
-                    if (currentStep > 0) {
+                    
+                    // Draw Line
+                    if (i > 0) {
                         ctx.beginPath();
-                        ctx.moveTo(lastDotX + 7, lastDotY + 7);
-                        ctx.lineTo(dotX + 7, dotY + 7);
+                        ctx.moveTo(lastX, lastY);
+                        ctx.lineTo(dotX + 6, dotY + 6);
                         ctx.stroke();
                     }
-
-                    lastDotX = dotX; lastDotY = dotY;
-                    currentStep++;
-
-                    // Auto-scroll the page
-                    document.getElementById('p2').scrollTo({top: y - 100, behavior: 'smooth'});
-
-                    setTimeout(spawnLine, 1200);
-                }, 100);
+                    lastX = dotX + 6;
+                    lastY = dotY + 6;
+                    i++;
+                    setTimeout(step, 1000);
+                }, 500);
             }
-            spawnLine();
-        }
-
-        function startGauge() {
-            let count = 0;
-            const target = 100;
-            const timer = setInterval(() => {
-                count++;
-                document.getElementById('gauge').innerText = count + "%";
-                if(count === target) clearInterval(timer);
-            }, 25);
+            step();
         }
 
         function initScratch() {
             const canvas = document.getElementById('canvas-scratch');
             const ctx = canvas.getContext('2d');
             ctx.fillStyle = '#ffc0cb';
-            ctx.fillRect(0, 0, 300, 200);
+            ctx.fillRect(0, 0, 280, 180);
             ctx.fillStyle = '#ff1493';
-            ctx.font = "bold 18px Arial";
+            ctx.font = "bold 16px Arial";
             ctx.textAlign = "center";
-            ctx.fillText("SCRATCH WITH LOVE ❤️", 150, 105);
+            ctx.fillText("SCRATCH WITH LOVE ❤️", 140, 95);
 
-            let isScratching = false;
+            let drawing = false;
             const scratch = (e) => {
-                if(!isScratching) return;
+                if(!drawing) return;
                 const rect = canvas.getBoundingClientRect();
                 const x = (e.clientX || e.touches[0].clientX) - rect.left;
                 const y = (e.clientY || e.touches[0].clientY) - rect.top;
                 ctx.globalCompositeOperation = 'destination-out';
-                ctx.beginPath(); ctx.arc(x, y, 25, 0, Math.PI*2); ctx.fill();
+                ctx.beginPath(); ctx.arc(x, y, 20, 0, Math.PI*2); ctx.fill();
             };
-            canvas.onmousedown = canvas.ontouchstart = () => isScratching = true;
-            window.onmouseup = window.ontouchend = () => isScratching = false;
+            canvas.onmousedown = canvas.ontouchstart = () => drawing = true;
+            window.onmouseup = window.ontouchend = () => drawing = false;
             canvas.onmousemove = canvas.ontouchmove = scratch;
         }
     </script>
