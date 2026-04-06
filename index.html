@@ -74,14 +74,17 @@
 </head>
 <body>
 
-    <div class="bg-elements">
-        </div>
+    <audio id="bgMusic" loop>
+        <source src="tere-liye.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="bg-elements"></div>
 
     <div id="slide1" class="slide active">
         <img src="photo1.jpg" class="photo-frame">
         <h1 class="glow-blue">Good Morning, Arpita!</h1>
         <p class="sub-msg">The sun is up, but my world starts when you wake up. 💙</p>
-        <button onclick="next()" class="btn-blue">Wake Up My Love ☕</button>
+        <button onclick="startExperience()" class="btn-blue">Wake Up My Love ☕</button>
     </div>
 
     <div id="slide2" class="slide">
@@ -125,12 +128,19 @@
             <img src="photo7.jpg" class="photo-frame" style="width: 140px; height: 180px;">
         </div>
         <h1 class="glow-blue">Forever Yours</h1>
-        <p class="sub-msg">Good Morning, Arpita! I'm so lucky to have you in my life. I love you!(as frnd) 💙</p>
-        <p class="mt-10 text-xs text-gray-400">Made by 📷 - @smss1708</p>
+        <p class="sub-msg">Good Morning, Arpita! I'm so lucky to have you in my life. I love you (as frnd)!💙</p>
+        <p class="mt-10 text-xs text-gray-400">Made with love for Arpita</p>
     </div>
 
     <script>
         let step = 1;
+        const music = document.getElementById('bgMusic');
+
+        function startExperience() {
+            // Start music on first interaction
+            music.play().catch(error => console.log("Audio play failed:", error));
+            next();
+        }
 
         function next() {
             const current = document.getElementById('slide' + step);
